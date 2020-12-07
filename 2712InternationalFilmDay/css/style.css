@@ -1,0 +1,240 @@
+/*-----------------------------------------
+		Добавление новых шрифтов
+------------------------------------------*/
+@font-face {
+	font-family: 'Candara'; 
+	src: url(../fonts/Candara.ttf); 
+}
+
+@font-face {
+	font-family: 'FlowExt'; 
+	src: url(../fonts/FlowExt.otf); 
+}
+
+/*-----------------------------
+		Стандартные теги
+------------------------------*/
+body {
+	margin: 5px 50px 5px 50px;
+	padding: 10px;
+	font-family: 'FlowExt';
+	font-size:17px;
+	color:#000000;
+	background: linear-gradient(90deg, #b9deed, #efefef);
+}
+
+h1, h2, h3, h4, h5{
+	font-family: 'Candara';
+	margin:0px;
+	padding:0px;
+}
+
+p {
+	margin:0px;
+	padding:0px;
+}
+/*ul {
+	margin:0px;
+	padding:0px;
+}
+ul {
+	margin:0px;
+	padding:0px;
+	list-style:none;
+}*/
+
+input {
+	background:transparent;
+}
+
+a {
+	color: #02006b;
+	text-decoration:none;
+}
+
+a:hover {
+	color:#5a5a5a;
+	text-decoration:underline;
+}
+
+img {
+	border: 1px solid #000;
+	border-radius: 10px;
+	box-shadow:5px 5px 10px #2B1015;
+	margin: 3px 10px 10px 10px;
+}
+
+/*----------------------------------------------------------------------------
+		Анимация увеличенного просмотра фотографий в галлерее
+----------------------------------------------------------------------------*/
+
+.gall {
+	position: relative;
+	padding-top: 50%;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.gall img {
+	position: absolute;
+	top: 25%;
+	left: 12.5%;
+	max-width: 24.5%;
+	max-height: 49.5%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	cursor: zoom-in;
+	transition: .2s;
+	border: 3;
+}
+
+.gall img:nth-child(4n-2) {
+	left: 37.5%;
+}
+
+.gall img:nth-child(4n-1) {
+	left: 62.5%;
+}
+
+.gall img:nth-child(4n) {
+	left: 87.5%;
+}
+
+.gall img:nth-child(n+5) {
+	top: 75%;
+}
+
+.gall img:focus {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 1;
+	max-width: 100%;
+	max-height: 100%;
+	outline: none;
+	pointer-events: none;
+}
+
+.gall img:focus~div {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #fff;
+	cursor: zoom-out;
+}
+
+/*--------------------------------------------
+			Анимированный футер
+----------------------------------------------*/
+
+.footer{
+    background-color: #FFF;
+    position: relative;
+    margin: 50px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    font-size: 17px;
+    box-shadow: inset 6px 6px 8px 0 rgba(0,0,0,0.4);
+}
+.footer:after, 
+.footer:before {
+    mix-blend-mode:multiply;
+    filter:none;
+    z-index: -1;
+    content:'';
+    width: calc(100% + 90px);
+    height: calc(100% + 90px);
+    position: absolute;
+    animation: anim-footer 8s ease-in-out infinite;
+}
+@keyframes anim-footer {
+    0%, 100% {
+        clip-path: polygon(0 0, calc(100% - (33px)) calc(0% + (33px)), 100% 100%, calc(0% + (33px)) calc(100% - (33px)));
+    }
+    50% {
+        clip-path: polygon(calc(0% + (33px)) calc(0% + (33px)), 100% 0, calc(100% - (33px)) calc(100% - (33px)), 0 100%);
+    }
+}
+.footer:after{
+    animation-delay: -5s;
+    background-color: #BFE2FF;
+    clip-path: polygon(0 0, calc(100% - (33px)) calc(0% + (33px)), 100% 100%, calc(0% + (33px)) calc(100% - (33px)));
+}
+.footer:before {
+    background-color: #337AB7;
+    clip-path: polygon(calc(0% + (33px)) calc(0% + (33px)), 100% 0, calc(100% - (33px)) calc(100% - (33px)), 0 100%);
+}
+.footer:hover:after{
+    animation-delay: 1s;
+}
+.footer:hover:before, 
+.footer:hover:after {
+    animation-duration: 2s;
+}
+
+/*------------------------------------
+		всплывающая подсказка
+-------------------------------------*/
+
+/* задаем относительное позиционирование контейнеру */
+.block {
+	position:relative;
+}
+
+/* Оформление скрытого элемента по умолчанию */ 
+.hidden{
+	display: none;
+	position: absolute;
+	bottom: 130%;
+	left: 0px;
+	background-color: #fff;
+	color: #3aaeda;
+	padding: 5px;
+	text-align: center;
+	-moz-box-shadow: 0 1px 1px rgba(0,0,0,.16);
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.16);
+	box-shadow: 0 1px 1px rgba(0,0,0,.16);
+	font-size: 12px;
+}
+
+/* Дополнительное оформление скрытого элемента(необязательно) */
+.hover + .hidden:before{
+	content: " ";
+	position: absolute;
+	top: 98%;
+	left: 10%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	height: 0;
+	width: 0;
+	border: 7px solid transparent;
+	border-right: 7px solid #fff;
+	border-color: #fff transparent transparent transparent;
+	z-index: 2;
+}
+
+/* Дополнительное оформление скрытого элемента(необязательно) */
+.hover + .hidden:after{
+	content: " ";
+	position: absolute;
+	top: 100%;
+	left: 10%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	height: 0;
+	width: 0;
+	border: 7px solid transparent;
+	border-right: 7px solid #fff;
+	border-color: rgba(0,0,0,.16) transparent transparent transparent;
+	z-index: 1;
+}
+
+/* Появление скрытого элемента при наведении */
+.hover:hover + .hidden{
+	display: block;
+}
